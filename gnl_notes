@@ -1,0 +1,53 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    gnl_notes                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: spaipur- <spaipur-@student.42heilbronn.    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/07/27 11:27:44 by spaipur-          #+#    #+#              #
+#    Updated: 2025/07/27 20:33:36 by spaipur-         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+read()
+ssize_t read(int fd, void *buf, size_t count);   
+
+fd - file descriptor obtained from the open() function
+buf - a pointer to the buffer where the read data will be stored.
+count - number of bytes to read
+
+- returns number of bytes read , which can be less than count if the end of the file is reached or if the read operation is interrupted.
+- A return value of -1 indicates an error and the errno global variable is set to indicate the specific error.
+- In practice, the read() function is often used in a loop to read data in chunks, especially when dealing with large files or streaming data.
+- the read() function does not automatically null-terminate the data it reads.
+
+fgets()
+Behavior of fgets:
+fgets reads characters from the stream until one of the following conditions is met:
+A newline (\n) character is encountered.
+The end of the file (EOF) is reached.
+n - 1 characters have been read.
+The newline character (if encountered) is included in the resulting string, followed by a null terminator (\0).
+If the function successfully reads at least one character, it returns a pointer to the string str. If an error occurs or the end of the file is reached before any characters are read, it returns NULL.
+Example Usage:
+#include <stdio.h>
+
+int main() {
+    char buffer;
+    printf("Enter a line of text: ");
+    if (fgets(buffer, sizeof(buffer), stdin) != NULL) {
+        printf("You entered: %s", buffer);
+    } else {
+        printf("Error or end of input.\n");
+    }
+    return 0;
+}
+
+This function is considered safer than gets() because it allows the specification of a buffer size, thereby preventing buffer overflow vulnerabilities.
+ However, it has limitations in handling arbitrarily long lines, which led to the introduction of the getline() function in POSIX.1-2008.
+
+AI-generated answer. Please verify critical facts.
+
+
+
